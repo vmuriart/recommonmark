@@ -1,19 +1,35 @@
 language: python
-python:
- - 2.7
-sudo: false
+python: 3.5
+
 env:
- - TOX_ENV=py27
- - TOX_ENV=py34
- - TOX_ENV=docs
- - TOX_ENV=lint
+    - TOXENV=py26
+    - TOXENV=py27
+    - TOXENV=py33
+    - TOXENV=py34
+    - TOXENV=py35
+    - TOXENV=pypy
+    - TOXENV=pypy3
+    - TOXENV=flake8
+
+matrix:
+    fast_finish: true
+
+    include:
+        - python: "nightly"
+          env: TOXENV=py36
+
+    allow_failures:
+        - env: TOXENV=py26
+        - python: "nightly"
+
 install:
- - pip install tox
+    - pip install tox codecov
+
 script:
- - tox -e $TOX_ENV
+    - tox -e ${TOXENV}
+
+after_success:
+    - codecov
+
 notifications:
-  slack:
-    rooms:
-      - readthedocs:y3hjODOi7EIz1JAbD1Zb41sz#random
-    on_success: change
-    on_failure: always
+    email: false
