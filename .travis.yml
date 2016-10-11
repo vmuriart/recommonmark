@@ -7,16 +7,6 @@ env:
     - TOXENV=py35
     - TOXENV=flake8
 
-matrix:
-    fast_finish: true
-
-    include:
-        - python: "nightly"
-          env: TOXENV=py36
-
-    allow_failures:
-        - python: "nightly"
-
 install:
     - pip install tox codecov
 

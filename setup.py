@@ -14,7 +14,7 @@ setup(
     name='recommonmark',
     version=recommonmark.__version__,
     install_requires=[
-        'commonmark<=0.5.4',
+        'commonmark>=0.5.4',
         'docutils>=0.11'
     ],
     entry_points={
