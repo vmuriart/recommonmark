@@ -23,7 +23,7 @@ class SphinxIntegrationTests(unittest.TestCase):
             app.build(force_all=True)
             with io.open(test_file, encoding='utf-8') as fin:
                 text = fin.read().strip()
-                self.assertIn(test_string, text)
+                assert test_string in text
         finally:
             shutil.rmtree('_build')
             os.chdir('../..')
