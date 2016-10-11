@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from contextlib import contextmanager
 import itertools
 
@@ -14,7 +16,6 @@ def flatten(iterator):
 
 
 class _SectionHandler(object):
-
     def __init__(self, document):
         self._level_to_elem = {0: document}
 
@@ -25,7 +26,8 @@ class _SectionHandler(object):
 
     def _prune_levels(self, limit_level):
         self._level_to_elem = dict((level, elem)
-                                   for level, elem in self._level_to_elem.items()
+                                   for level, elem in
+                                   self._level_to_elem.items()
                                    if level <= limit_level)
 
     def add_new_section(self, section, level):
@@ -36,7 +38,6 @@ class _SectionHandler(object):
 
 
 class CommonMarkParser(parsers.Parser):
-
     """Parser of recommonmark."""
     supported = ('md', 'markdown')
 
@@ -108,7 +109,8 @@ class CommonMarkParser(parsers.Parser):
         new_section.append(title_node)
         name = nodes.fully_normalize_name(title_node.astext())
         new_section['names'].append(name)
-        self.current_node.document.note_implicit_target(new_section, new_section)
+        self.current_node.document.note_implicit_target(new_section,
+                                                        new_section)
 
         self.section_handler.add_new_section(new_section, block.level)
         self.current_node = new_section
@@ -194,6 +196,7 @@ def make_refname(label):
 def text_only(nodes):
     return "".join(s.c if s.t == "Str" else text_only(s.children)
                    for s in nodes)
+
 
 # Inlines
 

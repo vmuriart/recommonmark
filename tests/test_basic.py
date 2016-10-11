@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 
 from docutils.core import publish_parts
@@ -6,7 +8,6 @@ from recommonmark.parser import CommonMarkParser
 
 
 class TestStringMethods(unittest.TestCase):
-
     def test_basic_parser(self):
         source = '# Header'
 
@@ -16,6 +17,3 @@ class TestStringMethods(unittest.TestCase):
             parser=CommonMarkParser()
         )
         self.assertTrue(ret['title'], 'Header')
-
-if __name__ == '__main__':
-    unittest.main()

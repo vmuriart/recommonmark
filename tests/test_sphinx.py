@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import os
 import io
-import sys
 import shutil
 import unittest
 
@@ -8,7 +9,6 @@ from sphinx.application import Sphinx
 
 
 class SphinxIntegrationTests(unittest.TestCase):
-
     def _run_test(self, test_dir, test_file, test_string):
         os.chdir('tests/{0}'.format(test_dir))
         try:
@@ -28,8 +28,8 @@ class SphinxIntegrationTests(unittest.TestCase):
             shutil.rmtree('_build')
             os.chdir('../..')
 
-class CodeBlockTests(SphinxIntegrationTests):
 
+class CodeBlockTests(SphinxIntegrationTests):
     def test_integration(self):
         self._run_test(
             'sphinx_code_block',
@@ -39,7 +39,6 @@ class CodeBlockTests(SphinxIntegrationTests):
 
 
 class IndentedCodeTests(SphinxIntegrationTests):
-
     def test_integration(self):
         self._run_test(
             'sphinx_indented_code',
@@ -47,8 +46,8 @@ class IndentedCodeTests(SphinxIntegrationTests):
             '<div class="highlight">'
         )
 
-class CustomExtensionTests(SphinxIntegrationTests):
 
+class CustomExtensionTests(SphinxIntegrationTests):
     def test_integration(self):
         self._run_test(
             'sphinx_custom_md',

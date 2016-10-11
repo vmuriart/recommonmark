@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 """Implement statemachine and state that are needed to Generate Derivatives."""
+
 from docutils.statemachine import StateMachineWS
 from docutils.parsers.rst import languages
 from docutils.parsers.rst.states import Struct, RSTState, Inliner
@@ -7,7 +10,6 @@ from docutils.parsers.rst.directives import directive
 
 
 class DummyStateMachine(StateMachineWS):
-
     """A dummy state machine that mimicks the property of statemachine.
 
     This state machine cannot be used for parsing, it is only used to generate
