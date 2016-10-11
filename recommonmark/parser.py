@@ -41,14 +41,15 @@ class CommonMarkParser(parsers.Parser):
     """Parser of recommonmark."""
     supported = ('md', 'markdown')
 
-    def convert_blocks(self, blocks):
-        for block in blocks:
-            self.convert_block(block)
+    def convert_blocks(self, child1):
+        while (child1 is not None):
+            self.convert_block(child1)
+            child1 = child1.nxt
 
     def convert_block(self, block):
-        if (block.t == "Document"):
-            self.convert_blocks(block.children)
-        elif (block.t == "ATXHeader") or (block.t == "SetextHeader"):
+        if (block.t == "document"):
+            self.convert_blocks(block.first_child)
+        elif (block.t == "heading"):
             self.section(block)
         elif (block.t == "Paragraph"):
             self.paragraph(block)
@@ -99,7 +100,7 @@ class CommonMarkParser(parsers.Parser):
 
     # Blocks
     def section(self, block):
-        new_section = nodes.section(' '.join(block.strings))
+        new_section = nodes.section(block.string_content)
         new_section.line = block.start_line
         new_section['level'] = block.level
 
